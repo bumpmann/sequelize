@@ -4,13 +4,11 @@ dist: trusty
 language: node_js
 
 node_js:
-  - "4"
   - "6"
 
 branches:
   only:
   - master
-  - v3
 
 env:
   global:
@@ -29,9 +27,6 @@ env:
 
   matrix:
     - DIALECT=sqlite COVERAGE=true
-    - MYSQL_VER=mysql-57 DIALECT=mysql COVERAGE=true
-    - POSTGRES_VER=postgres-95 DIALECT=postgres COVERAGE=true
-    - POSTGRES_VER=postgres-95 DIALECT=postgres-native COVERAGE=true
 
 before_script:
   - "if [ $POSTGRES_VER ] || [ $MYSQL_VER ]; then docker-compose up -d ${POSTGRES_VER} ${MYSQL_VER}; fi"
