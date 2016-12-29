@@ -83,5 +83,13 @@ if (dialect === 'sqlite') {
 
       });
     });
+
+    describe('query that fails in a transaction', function() {
+      it('rejects its promise', function() {
+        return this.sequelize.transaction(t => {
+          return this.sequelize.query("SELECT * FROM non_existant_table", {raw: true, transaction: t}).to.eventually.be.rejected
+        }).to.eventually.be.rejected;
+      });
+    });
   });
 }
